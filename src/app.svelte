@@ -9,7 +9,6 @@
   onMount(() => {
     // todo
   });
-
 </script>
 
 <style lang="scss">
@@ -19,38 +18,38 @@
 
 <h1>Generate Angular unit test online</h1> 
 
+<pre>
+ . github link
+</pre>
 <resize-divs width class="h-100" on:resize-move={() => {}}>
-  <div class="accordion flex-fill" id="right-section" role="navigation">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion1">
-           According Heading 1
-        </button>
-      </h2>
-      <div id="accordion1" class="accordion-collapse collapse" data-bs-parent="#right-section">
-        <div class="accordion-body">
-          Accordion1 contents
-          <monaco-editor data-language="json"
-            bind:this={monacoEditor1}
-            on:monaco-change={formPropsChanged}
-          ></monaco-editor>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion2">
-          According Heading 2
-        </button>
-      </h2>
-      <div id="accordion2" class="accordion-collapse collapse" data-bs-parent="#right-section">
-        <div class="accordion-body p-0 py-1">
-          Accordion2 contents
-        </div>
-      </div>
-    </div>
+  <div>
+    <pre>{`
+    framework: 'jest',
+      klass: klassTemplate,
+      component: componentTemplate,
+      directive: directiveTemplate,
+      injectable: injectableTemplate, 
+      pipe: pipeTemplate 
+    // Your component may use directives and pipes, which are defined in app-level
+    // Because your test does not know app-level declarations, they may break your test
+    // Your unit test should declare them separately as mock objects
+    requiredComponentTestDeclarations
+      directives: [ 'myCustom' ] 
+      pipes: [ 'translate', 'phoneNumber', 'safeHtml' ]
+    // Your constructor may use injectable services, that may only work in certain environment
+    // Because your test does not know the specific environment, they may break your test
+    // The follow object will tell test generator to mock those services with your own code
+    // e.g. @Injectable() MockElementRef { nativeElement = {}; }
+    providerMocks: 
+      ElementRef: ['nativeElement = {};']
+      Router: ['navigate() {};']
+      Document: ['querySelector() {};']
+      HttpClient: ['post() {};']
+      TranslateService: ['translate() {};']
+      EncryptionService: []
+  `}</pre>
   </div>
   <div class="position-relative" style="width: 33%">
-    Right side
+    Editor section
   </div>
 </resize-divs>
