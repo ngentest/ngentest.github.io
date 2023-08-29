@@ -1,5 +1,5 @@
 import { loadScript, waitFor, getReactProp, addCss, removeCss } from './lib';
-import { getSchemaProperties } from './get-schema-properties.mjs';
+import { getSchemaProperties } from './get-schema-properties';
 
 declare const window: any;
 
