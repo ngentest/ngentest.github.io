@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     root: resolve(__dirname, 'src'),
-    // publicDir: resolve(__dirname, 'public'),
+    publicDir: resolve(__dirname, 'public'),
     // build: {
     //   outDir: resolve(__dirname, 'dist'),
     //   emptyOutDir: true,
