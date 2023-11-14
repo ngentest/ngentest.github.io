@@ -1,0 +1,7 @@
+html, body { height: 100% }
+x-monaco:is(#input, #output) { height: 600px }
+
+.output .spinner-border { display: none;}
+.output x-monaco#output { display: block;}
+.output.loading .spinner-border { display: block;}
+.output.loading  x-monaco#output { display: none;}
