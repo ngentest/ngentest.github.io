@@ -5,3 +5,5 @@ x-monaco:is(#input, #output) { height: 600px }
 .output x-monaco#output { display: block;}
 .output.loading .spinner-border { display: block;}
 .output.loading  x-monaco#output { display: none;}
+.load-example.btn.btn-link {margin: 0; padding: 0;}
+.load-example.btn.btn-link:focus {box-shadow: none;}

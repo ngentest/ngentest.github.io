@@ -1,6 +1,13 @@
-import defaultCode from './templates/default-code.ts.mjs';
+import exampleComponent from './examples/example.component.mjs';
+import exampleDirective from './examples/example.directive.mjs';
+import exampleKlass from './examples/example.klass.mjs';
+import examplePipe from './examples/example.pipe.mjs';
+import exampleService from './examples/example.service.mjs';
+
 import config from './config.mjs';
-  
+// const API_SERVER = 'http://localhost:3000';
+const API_SERVER = 'https://ngentest.vercel.app';
+
 document.addEventListener('DOMContentLoaded', main, false);
 
 async function main() {
@@ -10,7 +17,7 @@ async function main() {
   submitButton.addEventListener('click', () => {
     const typescript = inputEditor.getValue();
     document.querySelector('.output').classList.add('loading');
-    fetch('https://ngentest.vercel.app/api/ngentest', {
+    fetch(`${API_SERVER}/api/ngentest`, {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -25,5 +32,13 @@ async function main() {
         document.querySelector('.output').classList.remove('loading');
       })
   });
-  setTimeout(() => inputEditor.setValue(defaultCode), 500);
+  document.querySelector('.examples').addEventListener('click', e => {
+    const key = e.target?.name;
+    (key === 'component') && inputEditor.setValue(exampleComponent);
+    (key === 'directive') && inputEditor.setValue(exampleDirective);
+    (key === 'klass') && inputEditor.setValue(exampleKlass);
+    (key === 'pipe') && inputEditor.setValue(examplePipe);
+    (key === 'service') && inputEditor.setValue(exampleService);
+  });
+  setTimeout(() => inputEditor.setValue(exampleComponent), 500);
 }

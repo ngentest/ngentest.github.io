@@ -1,0 +1,15 @@
+{
+  "name": "ngentest.github.io",
+  "version": "1.0.0",
+  "description": "``` $ npm i http-server -g $ http-server . ```",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -a localhost --cors ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
