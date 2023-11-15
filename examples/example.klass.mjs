@@ -1,4 +1,5 @@
 export default `
+// @ts-nocheck
 import * as template from './my.html';
 import { loadingImage } from './loading';
 
@@ -11,7 +12,7 @@ export class ExampleKlass extends HTMLElement {
 
   get username() {
     return this.for === 'care' ?
-    this.userInfo.userId.replace('.', ' ') : \$\{this.userInfo.firstName} \$\{this.userInfo.lastName}\`;
+    this.userInfo.userId.replace('.', ' ') : \`\$\{this.userInfo.firstName} \$\{this.userInfo.lastName}\`;
   }
 
   connectedCallback() {
