@@ -4,6 +4,12 @@ import exampleKlass from './examples/example.klass.mjs';
 import examplePipe from './examples/example.pipe.mjs';
 import exampleService from './examples/example.service.mjs';
 
+import templateComponent from './templates/component.mjs';
+import templateDirective from './templates/directive.mjs';
+import templateKlass from './templates/klass.mjs';
+import templatePipe from './templates/pipe.mjs';
+import templateService from './templates/injectable.mjs';
+
 import config from './config.mjs';
 // const API_SERVER = 'http://localhost:3000';
 const API_SERVER = 'https://ngentest.vercel.app';
@@ -13,10 +19,15 @@ document.addEventListener('DOMContentLoaded', main, false);
 async function main() {
   const inputEditor = document.querySelector('x-monaco#input');
   const submitButton = document.querySelector('button#submit');
-  const outputEditor = document.querySelector('x-monaco#output');
+  const resultEditor = document.querySelector('x-monaco#result');
+  const templateEditor = document.querySelector('x-monaco#template');
+  const configEditor = document.querySelector('x-monaco#config');
+  const outputContainer = document.querySelector('.output');
+
   submitButton.addEventListener('click', () => {
     const typescript = inputEditor.getValue();
-    document.querySelector('.output').classList.add('loading');
+    outputContainer.classList.remove('template', 'config', 'result');
+    outputContainer.classList.add('loading');
     fetch(`${API_SERVER}/api/ngentest`, {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
@@ -26,19 +37,42 @@ async function main() {
         })
       }).then(resp => resp.json())
       .then(resp => {
-        outputEditor.setValue(resp.output);
+        resultEditor.setValue(resp.output);
       })
       .finally(() => {
-        document.querySelector('.output').classList.remove('loading');
+        outputContainer.classList.add('result');
+        outputContainer.classList.remove('loading');
       })
   });
-  document.querySelector('.examples').addEventListener('click', e => {
-    const key = e.target?.name;
-    (key === 'component') && inputEditor.setValue(exampleComponent);
-    (key === 'directive') && inputEditor.setValue(exampleDirective);
-    (key === 'klass') && inputEditor.setValue(exampleKlass);
-    (key === 'pipe') && inputEditor.setValue(examplePipe);
-    (key === 'service') && inputEditor.setValue(exampleService);
+
+  document.querySelector('.types').addEventListener('click', e => {
+    const key = e.target?.value;
+    if (key === 'component') {
+      inputEditor.setValue(exampleComponent);
+      templateEditor.setValue(templateComponent);
+    } else if (key === 'directive') {
+      inputEditor.setValue(exampleDirective);
+      templateEditor.setValue(templateDirective);
+    } else if (key === 'klass') { 
+      inputEditor.setValue(exampleKlass);
+      templateEditor.setValue(templateKlass);
+    } else if (key === 'pipe') { 
+      inputEditor.setValue(examplePipe);
+      templateEditor.setValue(templatePipe);
+    } else if (key === 'service') { 
+      inputEditor.setValue(exampleService);
+      templateEditor.setValue(templateService);
+    }
   });
-  setTimeout(() => inputEditor.setValue(exampleComponent), 500);
+
+  document.querySelector('.options').addEventListener('click', e => {
+    const key = e.target?.value;
+    outputContainer.classList.remove('template', 'config', 'result');
+    outputContainer.classList.add(key);
+  });
+
+  setTimeout(() => {
+    inputEditor.setValue(exampleComponent);
+    templateEditor.setValue(templateComponent);
+  }, 500);
 }

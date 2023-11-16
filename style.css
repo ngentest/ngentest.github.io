@@ -1,9 +1,14 @@
 html, body { height: 100% }
-x-monaco:is(#input, #output) { height: 600px }
+x-monaco { height: 600px }
 
 .output .spinner-border { display: none;}
-.output x-monaco#output { display: block;}
+.output x-monaco { display: none;}
+.output.template x-monaco#template { display: block; }
+.output.config x-monaco#config { display: block; }
+.output.result x-monaco#result { display: block; }
+
 .output.loading .spinner-border { display: block;}
-.output.loading  x-monaco#output { display: none;}
+.output.loading x-monaco { display: none;}
+
 .load-example.btn.btn-link {margin: 0; padding: 0;}
 .load-example.btn.btn-link:focus {box-shadow: none;}

@@ -23,25 +23,31 @@
       <h1>Generate Angular unit test automatically</h1>
       <i class="fa-brands fa-github"></i>
       <div class="row">
-        <div class="col-5 border input">
-          <x-monaco id="input" language="typescript"></x-monaco>
+        <div class="col-5 input">
+          <div class="types d-flex justify-content-evenly">
+            <input x type="radio" name="type" value="component" checked> Component
+            <input x type="radio" name="type" value="directive"> Directive
+            <input x type="radio" name="type" value="klass"> Class
+            <input x type="radio" name="type" value="pipe"> Pipe
+            <input x type="radio" name="type" value="service"> Service
+          </div>
+          <x-monaco class="border" id="input" language="typescript"></x-monaco>
         </div>
         <div class="col text-center">
-          <button id="submit">Generate</button>
-          <p class="examples d-flex flex-column my-4">
-            Examples
-            <button class="load-example btn btn-link" name="component">Component</button>
-            <button class="load-example btn btn-link" name="directive">Directive</button>
-            <button class="load-example btn btn-link" name="klass">Class</button>
-            <button class="load-example btn btn-link" name="pipe">Pipe</button>
-            <button class="load-example btn btn-link" name="service">Service</button>
-          </p>
+          <button id="submit" class="btn mt-4 btn-primary">Generate</button>
         </div>
-        <div class="col-5 border output">
+        <div class="col-5 output template">
+          <div class="options d-flex justify-content-evenly">
+            <input x type="radio" name="output" value="template" checked> Template
+            <input x type="radio" name="output" value="config"> Options
+            <input x type="radio" name="output" value="result"> Result
+          </div>
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
-          <x-monaco id="output" language="typescript"></x-monaco>
+          <x-monaco id="template"  class="border" language="plaintext"></x-monaco>
+          <x-monaco id="config"  class="border" language="javascript"></x-monaco>
+          <x-monaco id="result"  class="border" language="typescript"></x-monaco>
         </div>
       </div>
     </div>

@@ -1,13 +1,5 @@
 export default `
-import {
-  Component,
-  ComponentFactoryResolver,
-  ComponentRef,
-  Inject,
-  Injectable,
-  ReflectiveInjector,
-  ViewContainerRef
-} from '@angular/core';
+import { Component, ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
 import { EncryptionService } from '@rogers/oneview-components';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';

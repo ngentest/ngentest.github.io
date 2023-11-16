@@ -1,17 +1,5 @@
 export default `
-import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  PLATFORM_ID,
-  Renderer2,
-  ViewChild
-} from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
  @Directive ( {
