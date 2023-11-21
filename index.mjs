@@ -1,17 +1,7 @@
-import exampleComponent from './examples/example.component.mjs';
-import exampleDirective from './examples/example.directive.mjs';
-import exampleKlass from './examples/example.klass.mjs';
-import examplePipe from './examples/example.pipe.mjs';
-import exampleService from './examples/example.service.mjs';
-
-import templateComponent from './templates/component.mjs';
-import templateDirective from './templates/directive.mjs';
-import templateKlass from './templates/klass.mjs';
-import templatePipe from './templates/pipe.mjs';
-import templateService from './templates/injectable.mjs';
+import {exampleComponent, exampleDirective, exampleKlass, examplePipe, exampleService}  from './examples/index.mjs';
+import {templateComponent, templateDirective, templateKlass, templatePipe, templateService} from './templates/index.mjs';
 
 import config from './config.mjs';
-// const API_SERVER = 'http://localhost:3000';
 const API_SERVER = 'https://ngentest.vercel.app';
 
 document.addEventListener('DOMContentLoaded', main, false);
@@ -46,23 +36,8 @@ async function main() {
   });
 
   document.querySelector('.types').addEventListener('click', e => {
-    const key = e.target?.value;
-    if (key === 'component') {
-      inputEditor.setValue(exampleComponent);
-      templateEditor.setValue(templateComponent);
-    } else if (key === 'directive') {
-      inputEditor.setValue(exampleDirective);
-      templateEditor.setValue(templateDirective);
-    } else if (key === 'klass') { 
-      inputEditor.setValue(exampleKlass);
-      templateEditor.setValue(templateKlass);
-    } else if (key === 'pipe') { 
-      inputEditor.setValue(examplePipe);
-      templateEditor.setValue(templatePipe);
-    } else if (key === 'service') { 
-      inputEditor.setValue(exampleService);
-      templateEditor.setValue(templateService);
-    }
+    setInputEditor();
+    setTemplateEditor();
   });
 
   document.querySelector('.options').addEventListener('click', e => {
@@ -71,8 +46,33 @@ async function main() {
     outputContainer.classList.add(key);
   });
 
+  function setInputEditor() {
+    const typeSelected = Array.from(document.querySelectorAll('[name=type]')).find(el => el.checked).value;
+    inputEditor.setValue(
+      typeSelected === 'klass' ? exampleKlass :
+      typeSelected === 'pipe' ? examplePipe :
+      typeSelected === 'service' ? exampleService :
+      typeSelected === 'component' ? exampleComponent :
+      typeSelected === 'directive' ? exampleDirective : ''
+    );
+  }
+
+  function setTemplateEditor() {
+    const typeSelected = Array.from(document.querySelectorAll('[name=type]')).find(el => el.checked).value;
+    templateEditor.setValue(
+      typeSelected === 'klass' ? templateKlass :
+      typeSelected === 'pipe' ? templatePipe :
+      typeSelected === 'service' ? templateService :
+      typeSelected === 'component' ? templateComponent :
+      typeSelected === 'directive' ? templateDirective : ''
+    );
+  }
+
   setTimeout(() => {
-    inputEditor.setValue(exampleComponent);
-    templateEditor.setValue(templateComponent);
+    setInputEditor();
+    setTemplateEditor();
+    const selected = Array.from(document.querySelectorAll('[name=output]')).find(el => el.checked).value;
+    outputContainer.classList.remove('template', 'config', 'result');
+    outputContainer.classList.add(selected);
   }, 500);
 }

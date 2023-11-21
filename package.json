@@ -4,7 +4,7 @@
   "description": "``` $ npm i http-server -g $ http-server . ```",
   "main": "index.js",
   "scripts": {
-    "start": "http-server -a localhost --cors ."
+    "start": "http-server -o -a localhost --cors ."
   },
   "keywords": [],
   "author": "",

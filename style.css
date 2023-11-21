@@ -12,3 +12,19 @@ x-monaco { height: 600px }
 
 .load-example.btn.btn-link {margin: 0; padding: 0;}
 .load-example.btn.btn-link:focus {box-shadow: none;}
+
+
+.options label {
+  padding: 4px 16px;
+  border: 1px solid #CCC;
+  border-bottom: none;
+  position: relative;
+  top: 1px;
+  border-radius: 8px 8px 0 0;
+}
+.options label:has(input:checked) {
+  background: #FFF;
+}
+.options label input {
+  display: none;
+}

@@ -37,10 +37,16 @@
           <button id="submit" class="btn mt-4 btn-primary">Generate</button>
         </div>
         <div class="col-5 output template">
-          <div class="options d-flex justify-content-evenly">
-            <input x type="radio" name="output" value="template" checked> Template
-            <input x type="radio" name="output" value="config"> Options
-            <input x type="radio" name="output" value="result"> Result
+          <div class="options d-flex">
+            <label>
+              <input type="radio" name="output" value="result" checked> Result
+            </label>
+            <label>
+              <input type="radio" name="output" value="template"> Template
+            </label>
+            <label>
+              <input type="radio" name="output" value="config"> Options
+            </label>
           </div>
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
