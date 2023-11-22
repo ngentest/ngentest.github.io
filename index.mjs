@@ -1,8 +1,22 @@
 import {exampleComponent, exampleDirective, exampleKlass, examplePipe, exampleService}  from './examples/index.mjs';
 import {templateComponent, templateDirective, templateKlass, templatePipe, templateService} from './templates/index.mjs';
 
-import config from './config.mjs';
-const API_SERVER = 'https://ngentest.vercel.app';
+const API_SERVER = 'https://ngentest.vercel.app'; // 'http://localhost:3000';
+const userConfig = {
+  framework: 'jest',
+  requiredComponentTestDeclarations: { 
+    directives: [ 'myCustom' ], 
+    pipes: [ 'translate', 'phoneNumber', 'safeHtml' ],
+  },
+  providerMocks: {
+    ElementRef: `nativeElement = {};`,
+    Router: `navigate() {};`,
+    Document: `querySelector() {};`,
+    HttpClient: `post() {};`,
+    TranslateService: `translate() {};`,
+    EncryptionService: []
+  }
+};
 
 document.addEventListener('DOMContentLoaded', main, false);
 
@@ -18,6 +32,11 @@ async function main() {
     const typescript = inputEditor.getValue();
     outputContainer.classList.remove('template', 'config', 'result');
     outputContainer.classList.add('loading');
+
+    const config = JSON.parse(configEditor.getValue());
+    config.outputTemplates= {};
+    config.outputTemplates[getKlassType()] = templateEditor.getValue();
+
     fetch(`${API_SERVER}/api/ngentest`, {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
@@ -38,6 +57,7 @@ async function main() {
   document.querySelector('.types').addEventListener('click', e => {
     setInputEditor();
     setTemplateEditor();
+    setConfigEditor();
   });
 
   document.querySelector('.options').addEventListener('click', e => {
@@ -46,33 +66,47 @@ async function main() {
     outputContainer.classList.add(key);
   });
 
+  function getKlassType() {
+    return Array.from(document.querySelectorAll('[name=type]')).find(el => el.checked).value;
+  }
+
   function setInputEditor() {
-    const typeSelected = Array.from(document.querySelectorAll('[name=type]')).find(el => el.checked).value;
+    const klassType = getKlassType();
     inputEditor.setValue(
-      typeSelected === 'klass' ? exampleKlass :
-      typeSelected === 'pipe' ? examplePipe :
-      typeSelected === 'service' ? exampleService :
-      typeSelected === 'component' ? exampleComponent :
-      typeSelected === 'directive' ? exampleDirective : ''
+      klassType === 'klass' ? exampleKlass :
+      klassType === 'pipe' ? examplePipe :
+      klassType === 'service' ? exampleService :
+      klassType === 'component' ? exampleComponent :
+      klassType === 'directive' ? exampleDirective : ''
     );
   }
 
   function setTemplateEditor() {
-    const typeSelected = Array.from(document.querySelectorAll('[name=type]')).find(el => el.checked).value;
+    const klassType = getKlassType();
     templateEditor.setValue(
-      typeSelected === 'klass' ? templateKlass :
-      typeSelected === 'pipe' ? templatePipe :
-      typeSelected === 'service' ? templateService :
-      typeSelected === 'component' ? templateComponent :
-      typeSelected === 'directive' ? templateDirective : ''
+      klassType === 'klass' ? templateKlass :
+      klassType === 'pipe' ? templatePipe :
+      klassType === 'service' ? templateService :
+      klassType === 'component' ? templateComponent :
+      klassType === 'directive' ? templateDirective : ''
     );
   }
 
+  function setConfigEditor() {
+    const klassType = getKlassType();
+    const config = {...userConfig};
+    if (klassType !== 'component') {
+      delete config.requiredComponentTestDeclarations;
+    }
+    configEditor.setValue(JSON.stringify(config, null, '  '));
+  }
+
   setTimeout(() => {
+    const outputType = Array.from(document.querySelectorAll('[name=output]')).find(el => el.checked).value;
     setInputEditor();
     setTemplateEditor();
-    const selected = Array.from(document.querySelectorAll('[name=output]')).find(el => el.checked).value;
+    setConfigEditor();
     outputContainer.classList.remove('template', 'config', 'result');
-    outputContainer.classList.add(selected);
+    outputContainer.classList.add(outputType);
   }, 500);
 }
