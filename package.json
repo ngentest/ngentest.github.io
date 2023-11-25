@@ -1,7 +1,7 @@
 {
   "name": "ngentest.github.io",
   "version": "1.0.0",
-  "description": "``` $ npm i http-server -g $ http-server . ```",
+  "description": "Generate Angular unit test automatically",
   "main": "index.js",
   "scripts": {
     "start": "http-server -o -a localhost --cors ."

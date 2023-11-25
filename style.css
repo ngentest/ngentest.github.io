@@ -1,13 +1,13 @@
 html, body { height: 100% }
-x-monaco { height: 600px }
+x-monaco, .loading { height: 600px; }
 
-.output .spinner-border { display: none;}
+.output .loading { display: none;}
 .output x-monaco { display: none;}
 .output.template x-monaco#template { display: block; }
 .output.config x-monaco#config { display: block; }
 .output.result x-monaco#result { display: block; }
 
-.output.loading .spinner-border { display: block;}
+.output.loading .loading { display: flex;}
 .output.loading x-monaco { display: none;}
 
 .load-example.btn.btn-link {margin: 0; padding: 0;}
@@ -21,10 +21,17 @@ x-monaco { height: 600px }
   position: relative;
   top: 1px;
   border-radius: 8px 8px 0 0;
+  background: #F8F8F8;
 }
 .options label:has(input:checked) {
   background: #FFF;
 }
 .options label input {
   display: none;
+}
+.fs-7 {
+  font-size: .875rem!important;
+}
+.fs-8 {
+  font-size: .75rem!important;
 }

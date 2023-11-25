@@ -2,21 +2,32 @@ import {exampleComponent, exampleDirective, exampleKlass, examplePipe, exampleSe
 import {templateComponent, templateDirective, templateKlass, templatePipe, templateService} from './templates/index.mjs';
 
 const API_SERVER = 'https://ngentest.vercel.app'; // 'http://localhost:3000';
-const userConfig = {
+const userConfig = /*javascript*/ `return {
+  // 'jest' or 'karma'. The default is jest. 
+  // This value determines how function mock and assert is to be done.
   framework: 'jest',
+
+  // Your component may use directives and pipes, which are defined in app-level.
+  // Because your test does not know app-level declarations, they may break your test.
+  // Your unit test should declare them separately as mock objects
   requiredComponentTestDeclarations: { 
     directives: [ 'myCustom' ], 
     pipes: [ 'translate', 'phoneNumber', 'safeHtml' ],
   },
+
+  // Your constructor may use injectable services, that may only work in certain environment
+  // Because your test does not know the specific environment, they may break your test
+  // The follow object will tell test generator to mock those services with your own code
+  // e.g. @Injectable() MockElementRef { nativeElement = {}; }
   providerMocks: {
-    ElementRef: `nativeElement = {};`,
-    Router: `navigate() {};`,
-    Document: `querySelector() {};`,
-    HttpClient: `post() {};`,
-    TranslateService: `translate() {};`,
+    ElementRef: \`nativeElement = {};\`,
+    Router: \`navigate() {};\`,
+    Document: \`querySelector() {};\`,
+    HttpClient: \`post() {};\`,
+    TranslateService: \`translate() {};\`,
     EncryptionService: []
   }
-};
+}`;
 
 document.addEventListener('DOMContentLoaded', main, false);
 
@@ -33,7 +44,9 @@ async function main() {
     outputContainer.classList.remove('template', 'config', 'result');
     outputContainer.classList.add('loading');
 
-    const config = JSON.parse(configEditor.getValue());
+    const config = new Function(configEditor.getValue())();
+    console.log({config});
+
     config.outputTemplates= {};
     config.outputTemplates[getKlassType()] = templateEditor.getValue();
 
@@ -75,7 +88,7 @@ async function main() {
     inputEditor.setValue(
       klassType === 'klass' ? exampleKlass :
       klassType === 'pipe' ? examplePipe :
-      klassType === 'service' ? exampleService :
+      klassType === 'injectable' ? exampleService :
       klassType === 'component' ? exampleComponent :
       klassType === 'directive' ? exampleDirective : ''
     );
@@ -86,7 +99,7 @@ async function main() {
     templateEditor.setValue(
       klassType === 'klass' ? templateKlass :
       klassType === 'pipe' ? templatePipe :
-      klassType === 'service' ? templateService :
+      klassType === 'injectable' ? templateService :
       klassType === 'component' ? templateComponent :
       klassType === 'directive' ? templateDirective : ''
     );
@@ -94,11 +107,10 @@ async function main() {
 
   function setConfigEditor() {
     const klassType = getKlassType();
-    const config = {...userConfig};
     if (klassType !== 'component') {
       delete config.requiredComponentTestDeclarations;
     }
-    configEditor.setValue(JSON.stringify(config, null, '  '));
+    configEditor.setValue(userConfig);
   }
 
   setTimeout(() => {
