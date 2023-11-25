@@ -76,21 +76,21 @@
               <button x class="icon small" value="template">?</button>
               <x-dropdown class="p-4 fs-7">
                 <p>
-                  EJS template for each Angular class.  You can override the default template.
+                  EJS template to generate Angular unit test.
                 </p>
 
-                These are variables available for EJS template.
+                Vailables available;
                 <ul>
-                  <li><b>className</b>: class name</li>
-                  <li><b></b>importMocks</b>: Array of genetrated code for import statements.</li>
-                  <li><b>providerMocks</b>: Array of generated code for class arguments.</li>
-                  <li><b>constructorParamJs</b>: Generated code constructor params for a new instance.</li>
-                  <li><b>functionTests</b>: A key/value expression of generated code of class function tests. The key is function name.</li>
+                  <li><b>className</b>: name of Angular class</li>
+                  <li><b>importMocks</b>: Array of genetrated code for import statements.</li>
+                  <li><b>providerMocks</b>: Array of generated code for constructor providers.</li>
+                  <li><b>constructorParamJs</b>: Generated code for constructor arguments.</li>
+                  <li><b>functionTests</b>: A key/value expression of generated codes for class methods. The key is function name.</li>
                   <li><b>config</b>: config object. e.g. config.requiredComponentTestDeclaratoins.directives.</li>
-                  <li><b>accessorTests</b>: A key/value expressoin of generated code for getters and setters. </li>
-                  <li><b>componentProviderMocks</b>: For component only. Array of generated code for a component class arguments.</li>
-                  <li><b>inputMocks</b>: For component and directive only. Array of generated code to mock directive @Input.</li>
-                  <li><b>outputMocks</b>: For component and directive only. Array of generated code to mock directive @Output.</li>
+                  <li><b>accessorTests</b>: A key/value expressoin of generated codes for class getters and setters. </li>
+                  <li><b>componentProviderMocks</b>: For component only. Array of generated code for a component providers.</li>
+                  <li><b>inputMocks</b>: For component and directive only. Array of generated code to mock @Input.</li>
+                  <li><b>outputMocks</b>: For component and directive only. Array of generated code to mock @Output.</li>
                 </ul>
               </x-dropdown>
             </label>
