@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
     <!-- bootstrap 5.0.2 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -28,7 +28,7 @@
         <a class="github-button" href="https://github.com/allenhwkim/ngentest/issues" data-icon="octicon-issue-opened" data-show-count="true">Issue</a>
         <a class="github-button" href="https://github.com/allenhwkim/ngentest/discussions" data-icon="octicon-comment-discussion">Discuss</a>
       </h1>
-      <div class="row">
+      <div class="row mt-4">
         <div class="col-5 input">
           <div class="types d-flex justify-content-evenly">
             <input x type="radio" name="type" value="component" checked> Component
@@ -39,8 +39,32 @@
           </div>
           <x-monaco class="border" id="input" language="typescript"></x-monaco>
         </div>
-        <div class="col text-center">
+        <div class="col text-center d-flex flex-column justify-content-between">
           <button id="submit" class="btn mt-4 btn-primary">Generate</button>
+          <div>
+            <h2 class="h6">Articles</h2>
+            <ul class="text-start list-unstyled">
+              <li>
+                <a href="https://medium.com/allenhwkim/generate-angular-unit-tests-automatically-1300601ed73">Generate Angular unit test</a>
+              </li>
+              <li>
+              <a href="https://medium.com/allenhwkim/how-to-parse-typescript-from-source-643387971f4e">How to parse Typescript</a>
+              </li>
+              <li>
+              <a href="https://medium.com/allenhwkim/how-to-parse-javascript-from-source-ffbc47b1183b">How to parse Javascript</a>
+              </li>
+            </ul> 
+            <br/>
+            <a class="link-underline-light" href="https://elements-x.com/">
+              <img src="https://elements-x.com/logo.png" height="24">
+            </a>
+            <a class="link-underline-light" href="https://getbootstrap.com/docs/5.3">
+              <i class="fa-brands fa-bootstrap"></i>
+            </a>
+            <a href="https://fontawesome.com/v6/docs">
+              <i class="fa-brands fa-square-font-awesome"></i>
+            </a>
+          </div>
         </div>
         <div class="col-5 output template">
           <div class="options d-flex">
@@ -87,6 +111,7 @@
         </div>
       </div>
     </div>
+
 
     <script type="module" src="index.mjs"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
