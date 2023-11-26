@@ -34,19 +34,17 @@ document.addEventListener('DOMContentLoaded', main, false);
 async function main() {
   const inputEditor = document.querySelector('x-monaco#input');
   const submitButton = document.querySelector('button#submit');
-  const resultEditor = document.querySelector('x-monaco#result');
-  const templateEditor = document.querySelector('x-monaco#template');
-  const configEditor = document.querySelector('x-monaco#config');
-  const outputContainer = document.querySelector('.output');
+  const outputsContainer = document.querySelector('.outputs');
+  const resultEditor = document.querySelector('.outputs x-monaco#result');
+  const templateEditor = document.querySelector('.outputs x-monaco#template');
+  const configEditor = document.querySelector('.outputs x-monaco#config');
 
   submitButton.addEventListener('click', () => {
     const typescript = inputEditor.getValue();
-    outputContainer.classList.remove('template', 'config', 'result');
-    outputContainer.classList.add('loading');
+    outputsContainer.classList.remove('template', 'config', 'result', 'ads');
+    outputsContainer.classList.add('loading');
 
     const config = new Function(configEditor.getValue())();
-    console.log({config});
-
     config.outputTemplates= {};
     config.outputTemplates[getKlassType()] = templateEditor.getValue();
 
@@ -59,28 +57,26 @@ async function main() {
         })
       }).then(resp => resp.json())
       .then(resp => {
+        document.querySelector('input[name=output-button][value=result]').checked = true;
         resultEditor.setValue(resp.output);
-      })
-      .finally(() => {
-        outputContainer.classList.add('result');
-        outputContainer.classList.remove('loading');
-      })
+        outputsContainer.classList.remove('loading');
+        outputsContainer.classList.add('result');
+      });
   });
 
-  document.querySelector('.types').addEventListener('click', e => {
+  document.querySelector('.input-types').addEventListener('click', e => {
     setInputEditor();
     setTemplateEditor();
     setConfigEditor();
   });
 
-  document.querySelector('.options').addEventListener('click', e => {
-    const key = e.target?.value;
-    outputContainer.classList.remove('template', 'config', 'result');
-    outputContainer.classList.add(key);
+  document.querySelector('.output-buttons').addEventListener('click', e => {
+    outputsContainer.classList.remove('template', 'config', 'result', 'ads');
+    outputsContainer.classList.add(e.target?.value);
   });
 
   function getKlassType() {
-    return Array.from(document.querySelectorAll('[name=type]')).find(el => el.checked).value;
+    return Array.from(document.querySelectorAll('.input-types [name=input-type]')).find(el => el.checked).value;
   }
 
   function setInputEditor() {
@@ -114,11 +110,8 @@ async function main() {
   }
 
   setTimeout(() => {
-    const outputType = Array.from(document.querySelectorAll('[name=output]')).find(el => el.checked).value;
     setInputEditor();
     setTemplateEditor();
     setConfigEditor();
-    outputContainer.classList.remove('template', 'config', 'result');
-    outputContainer.classList.add(outputType);
   }, 500);
 }

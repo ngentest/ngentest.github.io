@@ -1,20 +1,9 @@
 html, body { height: 100% }
-x-monaco, .loading { height: 600px; min-width: 360px;}
 
-.output .loading { display: none;}
-.output x-monaco { display: none;}
-.output.template x-monaco#template { display: block; }
-.output.config x-monaco#config { display: block; }
-.output.result x-monaco#result { display: block; }
+x-monaco#input { height: 600px; min-width: 360px;}
 
-.output.loading .loading { display: flex;}
-.output.loading x-monaco { display: none;}
-
-.load-example.btn.btn-link {margin: 0; padding: 0;}
-.load-example.btn.btn-link:focus {box-shadow: none;}
-
-
-.options label {
+/* output-buttons */
+.output-buttons label {
   padding: 4px 16px;
   border: 1px solid #CCC;
   border-bottom: none;
@@ -23,12 +12,22 @@ x-monaco, .loading { height: 600px; min-width: 360px;}
   border-radius: 8px 8px 0 0;
   background: #F8F8F8;
 }
-.options label:has(input:checked) {
+.output-buttons label:has(input:checked) {
   background: #FFF;
 }
-.options label input {
+.output-buttons label input {
   display: none;
 }
+
+/* outputs */
+.outputs :is(.loading, x-monaco, .ads) { height: 600px; min-width: 360px; display: none }
+.outputs.ads .ads { display: flex; }
+.outputs.loading .loading { display: flex; }
+.outputs.template x-monaco#template { display: block; }
+.outputs.config x-monaco#config { display: block; }
+.outputs.result x-monaco#result { display: block; }
+
+/* additional utility bootstrap classes */
 .fs-7 {
   font-size: .875rem!important;
 }
