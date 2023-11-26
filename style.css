@@ -20,8 +20,8 @@ x-monaco#input { height: 600px; min-width: 360px;}
 }
 
 /* outputs */
-.outputs :is(.loading, x-monaco, .ads) { height: 600px; min-width: 360px; display: none }
-.outputs.ads .ads { display: flex; }
+.outputs :is(.loading, x-monaco, .ads) { height: 600px; min-width: 360px; display: none;}
+.outputs.ads .ads { display: flex; min-width: 360px; }
 .outputs.loading .loading { display: flex; }
 .outputs.template x-monaco#template { display: block; }
 .outputs.config x-monaco#config { display: block; }
