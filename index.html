@@ -30,12 +30,22 @@
       </h1>
       <div class="row mt-4">
         <div class="col col-lg-5 input">
-          <div class="types d-flex justify-content-evenly">
-            <input x type="radio" name="type" value="component" checked> Component
-            <input x type="radio" name="type" value="directive"> Directive
-            <input x type="radio" name="type" value="klass"> Class
-            <input x type="radio" name="type" value="pipe"> Pipe
-            <input x type="radio" name="type" value="injectable"> Service
+          <div class="types d-flex flex-wrap">
+            <label class="me-2">
+              <input x type="radio" name="type" value="component" checked> Component
+            </label>
+            <label class="me-2">
+              <input x type="radio" name="type" value="directive"> Directive
+            </label>
+            <label class="me-2">
+              <input x type="radio" name="type" value="klass"> Class
+            </label>
+            <label class="me-2">
+              <input x type="radio" name="type" value="pipe"> Pipe
+            </label>
+            <label class="me-2">
+              <input x type="radio" name="type" value="injectable"> Service
+            </label>
           </div>
           <x-monaco class="border" id="input" language="typescript"></x-monaco>
         </div>
