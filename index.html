@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="p-4">
+  <body class="p-2 p-lg-4">
     <div class="container">
       <h1>Online Angular unit test generator.
         <a href="https://github.com/allenhwkim/ngentest"><i class="fa-brands fa-github h4"></i></a>
@@ -29,7 +29,7 @@
         <a class="github-button" href="https://github.com/allenhwkim/ngentest/discussions" data-icon="octicon-comment-discussion">Discuss</a>
       </h1>
       <div class="row mt-4">
-        <div class="col-5 input">
+        <div class="col col-lg-5 input">
           <div class="types d-flex justify-content-evenly">
             <input x type="radio" name="type" value="component" checked> Component
             <input x type="radio" name="type" value="directive"> Directive
@@ -39,7 +39,7 @@
           </div>
           <x-monaco class="border" id="input" language="typescript"></x-monaco>
         </div>
-        <div class="col text-center d-flex flex-column justify-content-between">
+        <div class="col col-lg-2 text-center d-flex flex-column justify-content-between">
           <button id="submit" class="btn mt-4 btn-primary">Generate</button>
           <div>
             <h2 class="h6">Articles</h2>
@@ -54,7 +54,6 @@
               <a href="https://medium.com/allenhwkim/how-to-parse-javascript-from-source-ffbc47b1183b">How to parse Javascript</a>
               </li>
             </ul> 
-            <br/>
             <a class="link-underline-light" href="https://elements-x.com/">
               <img src="https://elements-x.com/logo.png" height="24">
             </a>
@@ -66,7 +65,7 @@
             </a>
           </div>
         </div>
-        <div class="col-5 output template">
+        <div class="col col-lg-5 output template">
           <div class="options d-flex">
             <label>
               <input type="radio" name="output" value="result" checked> Result

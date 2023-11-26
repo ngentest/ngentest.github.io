@@ -1,5 +1,5 @@
 html, body { height: 100% }
-x-monaco, .loading { height: 600px; }
+x-monaco, .loading { height: 600px; min-width: 360px;}
 
 .output .loading { display: none;}
 .output x-monaco { display: none;}
