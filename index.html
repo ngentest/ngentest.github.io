@@ -6,7 +6,7 @@
     <meta name="description" content="Online Angular unit test generator" />
 
     <title>Generate unit test automatically for Angular</title>
-
+              
     <!-- elements-x 3 -->
     <script src="https://unpkg.com/elements-x"></script>
 
@@ -28,6 +28,7 @@
         <a class="github-button" href="https://github.com/allenhwkim/ngentest/issues" data-icon="octicon-issue-opened" data-show-count="true">Issue</a>
         <a class="github-button" href="https://github.com/allenhwkim/ngentest/discussions" data-icon="octicon-comment-discussion">Discuss</a>
       </h1>
+      For those who are are not a fan of test-driven development, generate unit tests for Angular classes after coding is done.
       <div class="row mt-4">
         <div class="col col-lg-5 input">
           <div class="input-types d-flex flex-wrap">
@@ -129,6 +130,60 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="container mx-auto w-lg-50">
+      <p>
+        How much do you like to write unit tests from the scratch? 
+      </p>
+
+      <p>
+        Most of the answer would be “not so much”. The reason behind this guess is that
+        writing the first successful unit test is just a copy, paste, and modification job, and it's not a pleasant task.
+      </p>
+
+      <p>
+        What if there is a command that can do this job (copy, paste, and modification)?
+      </p>
+
+      <p>
+        <strong>TL;DR; Yes, there is a command.</strong>
+      </p>
+
+      <p>
+        Let's say you coded your Angular component, and you want to write a unit test for the component,
+        The following command will auto-generated the unit test for it, and it works like a charm.
+      </p>
+
+      <pre>
+        $ npm install ngentest -g # to run this command anywhere
+        $ gentest my.component.ts # node_modules/.bin/gentest
+      </pre>
+      
+      <p>How is it possible? Because the command will parse the following data from your Typescript class.</p>
+
+      <ul>
+        <li>Class Name</li>
+        <li>Imports</li>
+        <li>Inputs, Outputs</li>
+        <li>Mocks required</li>
+        <li>Providers for TestBed</li>
+        <li>List of functions to test</li>
+      </ul>
+
+      <p>
+        By running a <code>ngentest</code> command, more than half of your test will be done.
+        It actually generates much more than half of your unit test. With this help, you can save a lot of time.
+        These are the minimal coverage percentages number by ngentest for each type. 
+        For simple components and directives, it easily covers 100% of your code.
+      </p>
+
+      <ul>
+        <li>Component (65%)</li>
+        <li>Directive (65%)</li>
+        <li>Service (70%)</li>
+        <li>Pipe (80%)</li>
+      </ul>
+
     </div>
     <script type="module" src="index.mjs"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
