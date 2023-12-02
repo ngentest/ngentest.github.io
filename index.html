@@ -152,21 +152,43 @@
       </div>
     </div>
     <div class="container mx-auto w-lg-50">
-      <p>
-        How much do you like to write unit tests from the scratch? 
+      <h2 class="h5 mt-4">How it works?</h2>
+      
+      <h3 class="h6">1. Parse a Typescript file and find the following.</h3>
+      <ul>
+        <li> imports: imports statements info.  </li>
+        <li> inputs: @Input statements info.  </li>
+        <li> outputs: @Output statements info.  </li>
+        <li> component provider: providers info used in @Component decorator.  </li>
+        <li> selector: selector info used in @Component or @Directove decorator.  </li>
+      </ul>
+
+      <h3 class="h6">2. Compile Typescript to Javascript, then parse the Javascript, and get the following.</h3>
+      <ul>
+        <li>constructor param data</li>
+        <li>provider mock data</li>
+        <li>accessor tests</li>
+        <li>function tests</li>
+      </ul>
+
+      <h3 class="h6">3. build ejs data from #1 and #2, and generate test code.</h3>
+
+      <p class="pt-4">
+        Have you ever coded an Angular unit tests from the scratch, 
+        and struggling to handle errors with missing mocks and mocks?
+        How did you like it?
+        I assume your answer to this is "not so much".
+        Because writing a successful Angular unit test is mostly copy, paste, and modification. 
+        The most important thing is it's not a pleasant task.
       </p>
 
       <p>
-        Most of the answer would be “not so much”. The reason behind this guess is that
-        writing the first successful unit test is just a copy, paste, and modification job, and it's not a pleasant task.
+        Copy, paste, and mofification. and again copy, paste, and modificaton.
+        This can be automated, right? So, this is the result. 
       </p>
 
       <p>
-        What if there is a command that can do this job (copy, paste, and modification)?
-      </p>
-
-      <p>
-        <strong>TL;DR; Yes, there is a command.</strong>
+        <strong>You can generate an Angular unit test with a command.</strong>
       </p>
 
       <p>
