@@ -191,41 +191,81 @@
         <strong>You can generate an Angular unit test with a command.</strong>
       </p>
 
-      <p>
-        Let's say you coded your Angular component, and you want to write a unit test for the component,
-        The following command will auto-generated the unit test for it, and it works like a charm.
-      </p>
 
-      <pre>
-        $ npm install ngentest -g # to run this command anywhere
-        $ gentest my.component.ts # node_modules/.bin/gentest
-      </pre>
-      
-      <p>How is it possible? Because the command will parse the following data from your Typescript class.</p>
-
-      <ul>
-        <li>Class Name</li>
-        <li>Imports</li>
-        <li>Inputs, Outputs</li>
-        <li>Mocks required</li>
-        <li>Providers for TestBed</li>
-        <li>List of functions to test</li>
-      </ul>
+      <p>Set a goal: What tests to create</p>
 
       <p>
-        By running a <code>ngentest</code> command, more than half of your test will be done.
-        It actually generates much more than half of your unit test. With this help, you can save a lot of time.
-        These are the minimal coverage percentages number by ngentest for each type. 
-        For simple components and directives, it easily covers 100% of your code.
+        E2E testing had already been applied to other Angular projects being maintained in the part. However, when running the test, there were issues such as verification being performed without proper rendering, causing the test to fail intermittently. At first, CI/CD was applied to the written test and the merge was set to be performed only when the test was successful, but as the reliability of the test was low, the merge was later performed even if the test failed.
       </p>
 
-      <ul>
-        <li>Component (65%)</li>
-        <li>Directive (65%)</li>
-        <li>Service (70%)</li>
-        <li>Pipe (80%)</li>
-      </ul>
+      <p>
+        As testing is applied to new projects, it not only solves issues with existing tests such as rendering, but also improves the test itself to provide reliable and meaningful feedback, has a fast execution time, and tests that do not require a lot of resources to write and maintain. The goal was to write .
+      </p>
 
+      <p>
+        Previously, Protractor, a testing library officially supported by Angular, was used, but there was news that development would be discontinued starting in 2022 and support for Protractor would be discontinued starting with Angular V15. As the Javascript standard has changed, features such as WebDriver wrapping and simplification of asynchronous processing provided by Protractor are no longer needed, so the main content is that the use of other testing tools that meet the current Javascript standard is recommended.
+      </p>
+
+      <p>
+        <strong>Easy-to-maintain test configuration possible</strong>
+        <br/><br/>
+        The test code of the existing project had await repeated throughout all the code as shown below.
+      </p>
+
+      <p>
+        In existing operations, asynchronous code had to be used to wait until an element is found in the DOM, even in actions such as click, and code just for waiting, such as the waitLoading function, had to be arbitrarily added. On the other hand, it seemed that using the automatic waiting function would require less resources to write and maintain, and readability could be further improved since there is no need to consider asynchronous processing.
+      </p>
+
+      <p>
+        Commands function
+        The first is the Commands function, which allows you to bundle and reuse test code like a method. If declared as Commands, it can be called and used from a cy object without a separate import like other methods provided by Cypress.
+      </p>
+
+      <p>
+        <strong>By creating frequently used execution logic as templates</strong>
+        <br/><br/>
+        we were able to avoid duplication and manage it separately from test code.
+      </p>
+
+      <p>
+        The second is the Intercept function. The Intercept function is a function that allows you to manipulate the API called from the service. We mainly used it to wait for a response when calling a specific API and then resume testing or mock the response. By using the Intercept API, we were able to almost eliminate code waiting for arbitrary periods of time, and mocking was also simple.
+      </p>
+
+      <p>
+        Among these, we decided to focus on functional testing. With visual testing, the test code would have to change whenever there was a markup change, and we thought that maintenance costs would increase if the test code was modified too frequently.
+      </p>
+
+      <p>
+        In existing tests, a Page Object was used to collect and manage selectors into one object to prevent code duplication and separate HTML structure changes and test code changes. Using a Page Object has the advantage of preventing duplication of code for importing elements and separating the selector from the test code.
+      </p>
+
+      <p>
+        The code below changes the same behavior as the code above by adding a Data Attribute to the HTML Tag. In the code above, when the parent DOM structure changes, the path to navigation of the corresponding element changes, ultimately requiring a code change. However, in the code below, if only the properties of the target element are maintained, there is no need to change the code, lowering volatility.
+      </p>
+
+      <p>
+        At first, it was handled by removing all relevant properties after initializing the DOM using Angular Directive, but when downloading the build file, you can still see the added test properties, and it does not solve the problem of the size of the build file being larger than before. More fundamentally, we used the method of removing the property from the build stage
+      </p>
+
+      <p>
+        There was also discussion about when mocking should be done. The existing test did not use Mocking, but in the test we were writing this time, there was a case where it was difficult to create the desired type of data with just an API call. In the Knowledge Manager Center, the created center can be linked to the chatbot service, but it was difficult to create linked data through API calls. In cases like this, where it is impossible to create data directly, we decided to use Mocking. We decided to use Mocking because complexity can increase even when multiple API calls are made to set up the test environment. In this way, we decided to use a method that is more appropriate depending on the time.
+      </p>
+
+      <p>
+        Another area of ​​concern was which unit to write tests in. Existing tests were executing only the most basic functions, and because of this, a successful test only guaranteed the minimum number of operations.
+      </p>
+
+      <p>
+        We wanted to improve the newly written tests so that test success would have greater meaning by ensuring that a wider range of business logic works well.
+      </p>
+
+      <p>
+        When large or small problems occurred while writing tests, I liked that rather than solving the immediate problem, I reconsidered the purpose of writing the test and found the most appropriate solution. In the process, I was able to greatly improve my understanding of the test. And while using a tool called Cypress, I was able to see how Cypress solved problems that could arise in test writing. In addition, I liked that the assignment was carried out with a clear sense of purpose of improving previous tests rather than writing tests out of habit.
+      </p>
+
+      <p>
+        When I didn't know the Intercept API mentioned earlier, I was waiting for a certain amount of time, but after understanding the API, I worked on improving the code to Intercept. In order to reduce such trial and error, there was a common opinion that it would have been nice to have a learning time to improve understanding of Cypress after the conceptual discussion. There was also the opinion that a more rigorous guide would reduce costs when writing future tests.
+      </p>
     </div>
     <script type="module" src="index.mjs"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
