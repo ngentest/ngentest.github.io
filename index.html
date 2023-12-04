@@ -152,7 +152,7 @@
       </div>
     </div>
     <div class="container mx-auto w-lg-50">
-      <h2 class="h5 mt-4">How it works?</h2>
+      <h2 class="h5 mt-4">How does it work?</h2>
       
       <h3 class="h6">1. Parse a Typescript file and find the following.</h3>
       <ul>
@@ -188,117 +188,8 @@
       </p>
 
       <p>
-        <strong>You can generate an Angular unit test with a command.</strong>
+        <strong>You can generate an Angular unit test with a command!!</strong>
       </p>
-
-
-      <p>Set a goal: What tests to create</p>
-
-      <p>
-        E2E testing had already been applied to other Angular projects being maintained in the part. However, when running the test, there were issues such as verification being performed without proper rendering, causing the test to fail intermittently. At first, CI/CD was applied to the written test and the merge was set to be performed only when the test was successful, but as the reliability of the test was low, the merge was later performed even if the test failed.
-      </p>
-
-      <p>
-        As testing is applied to new projects, it not only solves issues with existing tests such as rendering, but also improves the test itself to provide reliable and meaningful feedback, has a fast execution time, and tests that do not require a lot of resources to write and maintain. The goal was to write .
-      </p>
-
-      <p>
-        Previously, Protractor, a testing library officially supported by Angular, was used, but there was news that development would be discontinued starting in 2022 and support for Protractor would be discontinued starting with Angular V15. As the Javascript standard has changed, features such as WebDriver wrapping and simplification of asynchronous processing provided by Protractor are no longer needed, so the main content is that the use of other testing tools that meet the current Javascript standard is recommended.
-      </p>
-
-      <p>
-        <strong>Easy-to-maintain test configuration possible</strong>
-        <br/><br/>
-        The test code of the existing project had await repeated throughout all the code as shown below.
-      </p>
-
-      <p>
-        In existing operations, asynchronous code had to be used to wait until an element is found in the DOM, even in actions such as click, and code just for waiting, such as the waitLoading function, had to be arbitrarily added. On the other hand, it seemed that using the automatic waiting function would require less resources to write and maintain, and readability could be further improved since there is no need to consider asynchronous processing.
-      </p>
-
-      <p>
-        Commands function
-        The first is the Commands function, which allows you to bundle and reuse test code like a method. If declared as Commands, it can be called and used from a cy object without a separate import like other methods provided by Cypress.
-      </p>
-
-      <p>
-        <strong>By creating frequently used execution logic as templates</strong>
-        <br/><br/>
-        we were able to avoid duplication and manage it separately from test code.
-      </p>
-
-      <p>
-        The second is the Intercept function. The Intercept function is a function that allows you to manipulate the API called from the service. We mainly used it to wait for a response when calling a specific API and then resume testing or mock the response. By using the Intercept API, we were able to almost eliminate code waiting for arbitrary periods of time, and mocking was also simple.
-      </p>
-
-      <p>
-        Among these, we decided to focus on functional testing. With visual testing, the test code would have to change whenever there was a markup change, and we thought that maintenance costs would increase if the test code was modified too frequently.
-      </p>
-
-      <p>
-        In existing tests, a Page Object was used to collect and manage selectors into one object to prevent code duplication and separate HTML structure changes and test code changes. Using a Page Object has the advantage of preventing duplication of code for importing elements and separating the selector from the test code.
-      </p>
-
-      <p>
-        The code below changes the same behavior as the code above by adding a Data Attribute to the HTML Tag. In the code above, when the parent DOM structure changes, the path to navigation of the corresponding element changes, ultimately requiring a code change. However, in the code below, if only the properties of the target element are maintained, there is no need to change the code, lowering volatility.
-      </p>
-
-      <p>
-        At first, it was handled by removing all relevant properties after initializing the DOM using Angular Directive, but when downloading the build file, you can still see the added test properties, and it does not solve the problem of the size of the build file being larger than before. More fundamentally, we used the method of removing the property from the build stage
-      </p>
-
-      <p>
-        There was also discussion about when mocking should be done. The existing test did not use Mocking, but in the test we were writing this time, there was a case where it was difficult to create the desired type of data with just an API call. In the Knowledge Manager Center, the created center can be linked to the chatbot service, but it was difficult to create linked data through API calls. In cases like this, where it is impossible to create data directly, we decided to use Mocking. We decided to use Mocking because complexity can increase even when multiple API calls are made to set up the test environment. In this way, we decided to use a method that is more appropriate depending on the time.
-      </p>
-
-      <p>
-        Another area of ​​concern was which unit to write tests in. Existing tests were executing only the most basic functions, and because of this, a successful test only guaranteed the minimum number of operations.
-      </p>
-
-      <p>
-        We wanted to improve the newly written tests so that test success would have greater meaning by ensuring that a wider range of business logic works well.
-      </p>
-
-      <p>
-        When large or small problems occurred while writing tests, I liked that rather than solving the immediate problem, I reconsidered the purpose of writing the test and found the most appropriate solution. In the process, I was able to greatly improve my understanding of the test. And while using a tool called Cypress, I was able to see how Cypress solved problems that could arise in test writing. In addition, I liked that the assignment was carried out with a clear sense of purpose of improving previous tests rather than writing tests out of habit.
-      </p>
-
-      <p>
-        When I didn't know the Intercept API mentioned earlier, I was waiting for a certain amount of time, but after understanding the API, I worked on improving the code to Intercept. In order to reduce such trial and error, there was a common opinion that it would have been nice to have a learning time to improve understanding of Cypress after the conceptual discussion. There was also the opinion that a more rigorous guide would reduce costs when writing future tests.
-      </p>
-
-      Application code should be tested on a regular basis, and the testing process should be automated so that it can be executed whenever needed. Writing test scripts and running them as often as possible can help prevent them from coming back as a big problem later on.
-      <br/><br/>
-
-      Unit testing: It is a method of testing small code at the component or function level, and checking whether it executes the desired action by changing the data it inputs.
-      <br/><br/>
-
-      Angular applications can test functions, classes, and components.
-      <br/><br/>
-
-      Function test: Let's say you have a function that takes a string as an argument and converts it to uppercase. To test this function, you can then create a test case that passes null, undefined, empty strings, lowercase words, uppercase words, mixed case words, and numbers as arguments.
-      <br/><br/>
-
-      Class Testing: If you have functions in your class, you can write test specifications to make sure these methods work properly, and then group them together to form a test suite. In Angular, services are also classes, so you can test them this way.
-      <br/><br/>
-
-      Component Testing: You can test externally released APIs from the component. A public API here refers to a property or function that can be accessed from the outside.
-      <br/><br/>
-
-      Angular supports a test library that wraps Jasmine's describe(), it(), and xit() functions, plus functions such as async() and fakeAsync().
-      <br/><br/>
-
-      When testing a JavaScript application with the Jasmine framework, you can use test suites written directly in JavaScript or TypeScript, which can be managed together in the same folder as the application files, or in a different folder and run as intended.
-      <br/><br/>
-
-      You can manage all the fangli related to components in one folder. If you put the .spec.ts file, which is the test definition file, in the folder that contains the .ts, .html, and .css files that make up the components, you don't need to create a new folder.
-      <br/><br/>
-
-      You don't need to modify any SystemJS settings because where the application components are located, there are also test case files. You can run tests by importing only the test case definition files from the already saved SystemJS target folder.
-      <br/><br/>
-
-      Components consist of classes and templates, and methods in classes can be tested in the same way as regular functions are tested, and templates can be tested in a way that verifies that the bound data is displayed
-      <br/><br/>
 
     </div>
     <script type="module" src="index.mjs"></script>
