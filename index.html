@@ -266,6 +266,40 @@
       <p>
         When I didn't know the Intercept API mentioned earlier, I was waiting for a certain amount of time, but after understanding the API, I worked on improving the code to Intercept. In order to reduce such trial and error, there was a common opinion that it would have been nice to have a learning time to improve understanding of Cypress after the conceptual discussion. There was also the opinion that a more rigorous guide would reduce costs when writing future tests.
       </p>
+
+      Application code should be tested on a regular basis, and the testing process should be automated so that it can be executed whenever needed. Writing test scripts and running them as often as possible can help prevent them from coming back as a big problem later on.
+      <br/><br/>
+
+      Unit testing: It is a method of testing small code at the component or function level, and checking whether it executes the desired action by changing the data it inputs.
+      <br/><br/>
+
+      Angular applications can test functions, classes, and components.
+      <br/><br/>
+
+      Function test: Let's say you have a function that takes a string as an argument and converts it to uppercase. To test this function, you can then create a test case that passes null, undefined, empty strings, lowercase words, uppercase words, mixed case words, and numbers as arguments.
+      <br/><br/>
+
+      Class Testing: If you have functions in your class, you can write test specifications to make sure these methods work properly, and then group them together to form a test suite. In Angular, services are also classes, so you can test them this way.
+      <br/><br/>
+
+      Component Testing: You can test externally released APIs from the component. A public API here refers to a property or function that can be accessed from the outside.
+      <br/><br/>
+
+      Angular supports a test library that wraps Jasmine's describe(), it(), and xit() functions, plus functions such as async() and fakeAsync().
+      <br/><br/>
+
+      When testing a JavaScript application with the Jasmine framework, you can use test suites written directly in JavaScript or TypeScript, which can be managed together in the same folder as the application files, or in a different folder and run as intended.
+      <br/><br/>
+
+      You can manage all the fangli related to components in one folder. If you put the .spec.ts file, which is the test definition file, in the folder that contains the .ts, .html, and .css files that make up the components, you don't need to create a new folder.
+      <br/><br/>
+
+      You don't need to modify any SystemJS settings because where the application components are located, there are also test case files. You can run tests by importing only the test case definition files from the already saved SystemJS target folder.
+      <br/><br/>
+
+      Components consist of classes and templates, and methods in classes can be tested in the same way as regular functions are tested, and templates can be tested in a way that verifies that the bound data is displayed
+      <br/><br/>
+
     </div>
     <script type="module" src="index.mjs"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
